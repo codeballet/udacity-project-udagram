@@ -1,8 +1,8 @@
 import express from 'express';
+import {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
-import fs from 'fs';
 
 (async () => {
 
@@ -37,7 +37,7 @@ import fs from 'fs';
       return res.status(400).send('image_url is required');
     }
 
-    const image_filtered: string = await filterImageFromURL(image_url)
+    const image_filtered: Response | any = await filterImageFromURL(image_url)
       .catch( (e) => res.status(400).send('image_url not filtered') );
     
      return res.status(200).sendFile(image_filtered, () => {

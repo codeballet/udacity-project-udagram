@@ -38,7 +38,7 @@ import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
     }
 
     const image_filtered: Response | any = await filterImageFromURL(image_url)
-      .catch( (e) => res.status(400).send('image_url not filtered') );
+      .catch( (e) => res.status(422).send('image_url not filtered') );
     
      return res.status(200).sendFile(image_filtered, () => {
       let files: Array<string> = [image_filtered];
